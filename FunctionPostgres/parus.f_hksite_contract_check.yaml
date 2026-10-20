@@ -1,0 +1,18 @@
+﻿Schema: parus
+Name: f_hksite_contract_check
+Body: >
+  CREATE OR REPLACE FUNCTION parus.f_hksite_contract_check(amount numeric)
+   RETURNS boolean
+   LANGUAGE plpgsql
+  AS $function$
+
+  BEGIN
+      -- Договор с нулевой суммой не передаём на согласование.
+      RETURN amount > 0;
+  END;
+
+  $function$
+Grants:
+- Grantee: PUBLIC
+  Privilege: EXECUTE
+Owner: parus
